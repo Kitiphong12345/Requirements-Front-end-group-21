@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สมัครสมาชิก</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body> 
+    <h3 class="flex flex-row space-x-5 h-14 bg-gradient-to-r from-cyan-500 to-blue-500 items-center justify-center text-white font-bold"></h3>
+    <br>
+    <h2  align="center">สมัครสมาชิก</h2>
+    <br>
+    <form align="center">
+        <label for="username">ชื่อผู้ใช้:</label>
+        <input type="text" id="username" name="username" required placeholder="ป้อนชื่อผู้ใช้"><br><br>
+
+        <div>
+            <label for="email">อีเมล</label>
+            <input type="email" name="email" placeholder="ป้อนอีเมล">
+        </div><br>
+
+        <div>
+            <label for="age">เบอร์โทรศัพท์</label>
+            <input type="tel" name="tel" required placeholder="ป้อนเบอร์โทรศัพท์">
+        </div><br>
+
+        <label for="password">รหัสผ่าน:</label>
+        <input type="password" id="password" name="password" required placeholder="ป้อนรหัสผ่าน"><br><br>
+
+        <label for="confirm_password">ยืนยันรหัสผ่าน:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required placeholder="ป้อนรหัสผ่านอีกครั้ง"><br><br>
+ 
+        <button type="submit"><a href="../login/login.html">สมัครสมาชิก</a></button>
+    </form>
+
+<!--Footer -->
+<footer class="text-center py-4 text-sm text-gray-500">
+    © 2026 Hand In Paw Pethome
+</footer>
+</body>
+</html>
