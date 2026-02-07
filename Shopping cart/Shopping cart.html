@@ -94,6 +94,17 @@
     <section class="bg-white shadow-md rounded-lg p-4">
 
         <div class="flex justify-between mb-2">
+            <span>จำนวนสินค้า</span>
+            <span id="item-count">2 ชิ้น</span>
+        </div>
+
+        <div class="flex justify-between mb-2">
+            <span>วิธีการชำระเงิน</span>
+            <span id="item-price">Credit Card</span>
+
+        </div>
+
+        <div class="flex justify-between mb-2">
             <span>ราคารวมสินค้า</span>
             <span id="subtotal">฿800</span>
         </div>
@@ -106,6 +117,23 @@
         <div class="flex justify-between font-bold text-lg border-t pt-2">
             <span >รวมทั้งหมด</span>
             <span id="grand-total">฿850</span>
+        </div>
+
+        <div class="mt-6 flex justify-end gap-4">
+            <label>
+                <input type="radio" name="payment" value="ชำระเงินปลายทาง" checked class="mr-2">
+                ชำระเงินปลายทาง
+            </label>
+            
+            <label>
+                <input type="radio" name="payment" value="บัตรเครดิต/เดบิต" class="mr-2">
+                บัตรเครดิต/เดบิต
+            </label>
+
+            <label>
+                <input type="radio" name="payment" value="พร้อมเพย์" class="mr-2">
+                พร้อมเพย์
+            </label>
         </div>
 
         <div class="mt-6 flex justify-end gap-4">
@@ -171,6 +199,17 @@
             }
             });
         });
+        function showPayment(type) {
+        document.getElementById("bank").classList.add("hidden");
+        document.getElementById("promptpay").classList.add("hidden");
+        document.getElementById("card").classList.add("hidden");
+
+        document.getElementById(type).classList.remove("hidden");
+        }
+
+        function confirmPayment() {
+        alert("ทำรายการชำระเงินเรียบร้อย");
+        }
     //โหลดครั้งแรก
     updateCart();
     </script>
