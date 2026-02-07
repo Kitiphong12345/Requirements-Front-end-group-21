@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping cart</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../Shopping cart/Shopping.css">
 </head>
 <body class="font-sans bg-gray-50">
     <nav class="h-14 bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center gap-6 text-white font-bold">
@@ -47,9 +48,9 @@
             <div class="item-total font-bold">฿350</div>
 
             <div class="flex justify-center items-center gap-2">
-                <button class="qty-minus px-2 py-1 bg-gray-200 rounded">-</button>
+                <button class="qty-minus px-2 py-1 bg-gray-200 hover:bg-rose-500 rounded">-</button>
                 <span class="qty" data-price="350">1</span>
-                <button class="qty-plus px-2 py-1 bg-gray-200 rounded">+</button>
+                <button class="qty-plus px-2 py-1 bg-gray-200 hover:bg-lime-500 rounded">+</button>
             </div>
 
 
@@ -76,9 +77,9 @@
             <div class="item-total font-bold">฿450</div>
 
             <div class="flex justify-center items-center gap-2">
-                <button class="qty-minus px-2 py-1 bg-gray-200 rounded">-</button>
+                <button class="qty-minus px-2 py-1 bg-gray-200 hover:bg-rose-500 rounded">-</button>
                 <span class="qty" data-price="450">1</span>
-                <button class="qty-plus px-2 py-1 bg-gray-200 rounded">+</button>
+                <button class="qty-plus px-2 py-1 bg-gray-200 hover:bg-lime-500 rounded">+</button>
             </div>
             <!-- ปุ่มลบ -->
             <div class="flex items-center gap-3">
@@ -119,20 +120,29 @@
             <span id="grand-total">฿850</span>
         </div>
 
+        <div class="flex justify-between font-bold text-lg border-t pt-2">
+            <span id="payment-method-label" >ช่องทางการชำระเงิน</span>
+            
+        </div>
+
+        <!-- ตัวเลือกการชำระเงิน -->
         <div class="mt-6 flex justify-end gap-4">
-            <label>
+            <!-- ปลายทาง -->
+            <label class="flex items-center gap-2 border p-4 rounded cursor-pointer">
                 <input type="radio" name="payment" value="ชำระเงินปลายทาง" checked class="mr-2">
-                ชำระเงินปลายทาง
+                <span class="font-semibold">ชำระเงินปลายทาง</span>
             </label>
             
-            <label>
-                <input type="radio" name="payment" value="บัตรเครดิต/เดบิต" class="mr-2">
-                บัตรเครดิต/เดบิต
+            <!-- โอนผ่านธนาคาร -->
+            <label class="flex items-center gap-2 border p-4 rounded cursor-pointer">
+                <input type="radio" name="payment" value="bank" onclick="showPayment('bank')" checked>
+                <span class="font-semibold">โอนผ่านธนาคาร</span>
             </label>
 
-            <label>
-                <input type="radio" name="payment" value="พร้อมเพย์" class="mr-2">
-                พร้อมเพย์
+            <!-- พร้อมเพย์ -->
+            <label class="flex items-center gap-2 border p-4 rounded cursor-pointer">
+                <input type="radio" name="payment" value="promptpay" onclick="showPayment('promptpay')">
+                <span class="font-semibold">พร้อมเพย์</span>
             </label>
         </div>
 
@@ -199,6 +209,7 @@
             }
             });
         });
+
         function showPayment(type) {
         document.getElementById("bank").classList.add("hidden");
         document.getElementById("promptpay").classList.add("hidden");
@@ -213,5 +224,12 @@
     //โหลดครั้งแรก
     updateCart();
     </script>
+
+    <script>
+        function selectPayment(method) {
+            document.getElementById("payment-method").innerText = method;
+        }
+    </script>
+
 </body>
 </html>

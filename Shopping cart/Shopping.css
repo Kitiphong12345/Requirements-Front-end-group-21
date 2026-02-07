@@ -1,0 +1,21 @@
+nav a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #333;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f6f4f4;
+}
+span#subtotal {
+    color: rgb(2, 177, 26);
+}
+span#shipping {
+    color: rgb(2, 177, 26);
+}
+span#grand-total {
+    color: rgb(2, 177, 26);
+}
+div.item-total {
+    color: rgb(2, 177, 26);
+}
