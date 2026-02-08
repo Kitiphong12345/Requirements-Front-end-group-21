@@ -25,7 +25,7 @@
     </h1>
 
     <!--รายการสินค้า -->
-    <section class="bg-white shadow-md rounded-lg p-4 mb-6">
+    <section class="bg-white shadow-md rounded-lg p-10 mb-6 ">
 
         <!-- หัวตาราง -->
         <div class="grid grid-cols-5 font-bold border-b pb-2 mb-4 text-center">
@@ -44,23 +44,23 @@
                     Pawdy Senior 7+ อาหารสุนัขสูงวัย
                 </span>
             </div>
-
-            <div class="item-total font-bold">฿350</div>
+            
+            <div>฿350</div>
 
             <div class="flex justify-center items-center gap-2">
                 <button class="qty-minus px-2 py-1 bg-gray-200 hover:bg-rose-500 rounded">-</button>
                 <span class="qty" data-price="350">1</span>
                 <button class="qty-plus px-2 py-1 bg-gray-200 hover:bg-lime-500 rounded">+</button>
             </div>
-
-
+            
             <!-- ปุ่มลบ -->
             <div class="flex items-center gap-3">
-                <button onclick="removeItem('item1')" class="bg-sky-50 hover:bg-rose-500 text-white px-3 py-1 rounded">
+                <button onclick="removeItem('item1')" class="bg-sky-50 hover:bg-rose-500 text-white px-1 py-1 rounded">
                 <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="ลบ" class="w-4 h-4">
                 </button>
             </div>            
-            
+            <br>
+            <p>ราคารวมสินค้า:</p><div class="item-total font-bold">฿350</div>
         </div>
 
         <!-- สินค้า 2 -->
@@ -74,7 +74,7 @@
                 </span>
             </div>
 
-            <div class="item-total font-bold">฿450</div>
+            <div>฿450</div>
 
             <div class="flex justify-center items-center gap-2">
                 <button class="qty-minus px-2 py-1 bg-gray-200 hover:bg-rose-500 rounded">-</button>
@@ -83,10 +83,13 @@
             </div>
             <!-- ปุ่มลบ -->
             <div class="flex items-center gap-3">
-                    <button onclick="removeItem('item2')" class="bg-sky-50 hover:bg-rose-500 text-white px-3 py-1 rounded">
+                    <button onclick="removeItem('item2')" class="bg-sky-50 hover:bg-rose-500 text-white px-1 py-1 rounded">
                     <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="ลบ" class="w-4 h-4">
                     </button>
             </div> 
+            <br>
+            <p>ราคารวมสินค้า:</p><div class="item-total font-bold">฿450</div>
+
         </div>
 
     </section>
@@ -152,7 +155,7 @@
                เลือกซื้อสินค้าต่อ
             </a>
 
-            <button class="px-6 py-2 bg-lime-500 text-white font-bold rounded hover:bg-lime-600">
+            <button class="confirmPayment px-6 py-2 bg-lime-500 text-white font-bold rounded hover:bg-lime-600" onclick="confirmPayment()">
                 ชำระเงิน
             </button>
         </div>
