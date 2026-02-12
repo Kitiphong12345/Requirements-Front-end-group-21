@@ -13,14 +13,12 @@
     <div class="form-container max-w-4xl mx-auto my-5 px-10">
       <p class="title">เข้าสู่ระบบ</p>
       <form class="form">
-        <input type="email" class="input" placeholder="อีเมล" required>
+        <input type="email" class="input" placeholder="อีเมล"  required>
         <input type="password" class="input" placeholder="รหัสผ่าน" required>
         <p class="page-link">
           <span class="page-link-label">ลืมรหัสผ่าน</span>
         </p>
-        <button class="form-btn">
-          <a href="../Home page/Home page.html">เข้าสู่ระบบ</a>
-        </button>
+        <button class="form-btn" type="submit" onclick="return validateForm()">เข้าสู่ระบบ</button>
       </form>
       <p class="sign-up-label">
         หรือยังไม่มีบัญชีผู้ใช้?<span class="sign-up-link"><a href="../register/register.html">สมัครสมาชิก</a></span>
@@ -42,6 +40,22 @@
         </div>
       </div>
     </div>
+<script>
+  function validateForm() {
+
+    // ตัวอย่างเช็คข้อมูล
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    if (email === "" || password === "") {
+        alert("กรุณากรอกข้อมูลให้ครบ");
+        return false;
+    }
+
+    // ถ้าถูกต้อง ไปหน้าอื่น
+    window.location.href = "../Requirements-Front-end-group-21/Home page/Home page.html";
+}
+</script>
 <!--Footer -->
 <footer class="text-center py-4 text-sm text-gray-500">
     © 2026 Hand In Paw Pethome

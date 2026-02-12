@@ -9,30 +9,64 @@
 <body> 
     <h3 class="flex flex-row space-x-5 h-14 bg-gradient-to-r from-cyan-500 to-blue-500 items-center justify-center text-white font-bold"></h3>
     <br>
-    <h2  align="center">สมัครสมาชิก</h2>
-    <br>
-    <form align="center">
-        <label for="username">ชื่อผู้ใช้:</label>
-        <input type="text" id="username" name="username" required placeholder="ป้อนชื่อผู้ใช้"><br><br>
+    <div class="flex flex-col items-center justify-center h-screen">
+        <div class="w-full max-w-md bg-white rounded-lg shadow-md p-6">
+            <h2 class="title text-center font-bold text-gray-900 mb-4">สมัครสมาชิก</h2>
+            <form class="flex flex-col">
+                <input placeholder="ชื่อ" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="text" required>
+                <input placeholder="นามสกุล" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="text" required>
+                <input placeholder="อีเมล" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="email" required>
+                <input placeholder="ยืนยันอีเมล" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="email" required>
+                <input placeholder="รหัสผ่าน" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="password" required>
+                <input placeholder="ยืนยันรหัสผ่าน" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="password" required>
+                <label class="text-sm mb-2 text-gray-900 cursor-pointer" for="gender">
+                </label>
+                <select class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" id="gender" required>
+                   <option value="" disabled selected>เลือกเพศ</option>
+                   <option value="male">ชาย</option>
+                   <option value="female">หญิง</option>
+                   <option value="other">อื่นๆ</option>
+                </select>
+                <label class="text-sm mb-2 text-gray-900 cursor-pointer" for="age" id="age">วันเกิด</label>
+                <input class="bg-gray-100 text-gray-900 border-0 rounded-md p-2" id="age" type="date" max="2019-12-31" required>
+                <p class="text-gray-900 mt-4"> มีบัญชีอยู่แล้ว? <a class="text-sm text-blue-500 hover:underline mt-4" href="#">ล็อกอิน</a></p>
+                <button class="bg-gradient-to-r from-lime-500 to-lime-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-lime-600 transition ease-in-out duration-150" type="submit" onclick="return validateForm()">สมัครสมาชิก</button>
+            </form>
+            
+        </div>
+    </div>
+    <p id="error" style="color:red;"></p>
+<script>
+function validateForm() {
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-        <div>
-            <label for="email">อีเมล</label>
-            <input type="email" name="email" placeholder="ป้อนอีเมล">
-        </div><br>
+    const errorText = document.getElementById("error");
 
-        <div>
-            <label for="age">เบอร์โทรศัพท์</label>
-            <input type="tel" name="tel" required placeholder="ป้อนเบอร์โทรศัพท์">
-        </div><br>
+    // เช็คค่าว่าง
+    if (name === "" || email === "" || password === "") {
+        errorText.innerText = "กรุณากรอกข้อมูลให้ครบทุกช่อง";
+        return false;
+    }
 
-        <label for="password">รหัสผ่าน:</label>
-        <input type="password" id="password" name="password" required placeholder="ป้อนรหัสผ่าน"><br><br>
+    // เช็คอีเมลต้องมี @
+    if (!email.includes("@")) {
+        errorText.innerText = "รูปแบบอีเมลไม่ถูกต้อง";
+        return false;
+    }
 
-        <label for="confirm_password">ยืนยันรหัสผ่าน:</label>
-        <input type="password" id="confirm_password" name="confirm_password" required placeholder="ป้อนรหัสผ่านอีกครั้ง"><br><br>
- 
-        <button type="submit"><a href="../index.html">สมัครสมาชิก</a></button>
-    </form>
+    // เช็ครหัสผ่านอย่างน้อย 6 ตัว
+    if (password.length < 6) {
+        errorText.innerText = "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร";
+        return false;
+    }
+
+    // ถ้าผ่านทุกเงื่อนไข
+    alert("บันทึกข้อมูลเรียบร้อย");
+    return true;
+}
+</script>
 
 <!--Footer -->
 <footer class="text-center py-4 text-sm text-gray-500">
