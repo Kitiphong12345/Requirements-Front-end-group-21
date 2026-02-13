@@ -12,13 +12,14 @@
     <div class="flex flex-col items-center justify-center h-screen">
         <div class="w-full max-w-md bg-white rounded-lg shadow-md p-6">
             <h2 class="title text-center font-bold text-gray-900 mb-4">สมัครสมาชิก</h2>
-            <form class="flex flex-col">
-                <input placeholder="ชื่อ" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="text" required>
-                <input placeholder="นามสกุล" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="text" required>
-                <input placeholder="อีเมล" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="email" required>
-                <input placeholder="ยืนยันอีเมล" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="email" required>
-                <input placeholder="รหัสผ่าน" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="password" required>
-                <input placeholder="ยืนยันรหัสผ่าน" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="password" required>
+
+            <form class="flex flex-col form" onsubmit="validateForm(event)">
+                <input placeholder="ชื่อ" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="text" id="name" required>
+                <input placeholder="นามสกุล" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="text" id="surname" required>
+                <input placeholder="อีเมล" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="email" id="email" required>
+                <input placeholder="ยืนยันอีเมล" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="email" id="confirm-email" required>
+                <input placeholder="รหัสผ่าน" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="password" id="password" required>
+                <input placeholder="ยืนยันรหัสผ่าน" class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="password" id="confirm-password" required>
                 <label class="text-sm mb-2 text-gray-900 cursor-pointer" for="gender">
                 </label>
                 <select class="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" id="gender" required>
@@ -27,44 +28,52 @@
                    <option value="female">หญิง</option>
                    <option value="other">อื่นๆ</option>
                 </select>
-                <label class="text-sm mb-2 text-gray-900 cursor-pointer" for="age" id="age">วันเกิด</label>
-                <input class="bg-gray-100 text-gray-900 border-0 rounded-md p-2" id="age" type="date" max="2019-12-31" required>
+                <label class="text-sm mb-2 text-gray-900 cursor-pointer" for="birthdate">วันเกิด</label>
+                <input class="bg-gray-100 text-gray-900 border-0 rounded-md p-2" id="birthdate" type="date" max="2019-12-31" required>
                 <p class="text-gray-900 mt-4"> มีบัญชีอยู่แล้ว? <a class="text-sm text-blue-500 hover:underline mt-4" href="#">ล็อกอิน</a></p>
-                <button class="bg-gradient-to-r from-lime-500 to-lime-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-lime-600 transition ease-in-out duration-150" type="submit" onclick="return validateForm()">สมัครสมาชิก</button>
+                <button class="bg-gradient-to-r from-lime-500 to-lime-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-lime-600 transition ease-in-out duration-150" type="submit">สมัครสมาชิก</button>
             </form>
-            
+            <p id="error" class="text-red-500 text-center mt-4"></p>
         </div>
     </div>
-    <p id="error" style="color:red;"></p>
+
 <script>
-function validateForm() {
+function validateForm(event) {
+
+    event.preventDefault(); // หยุดการ submit ปกติ
+
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
+    const confirmEmail = document.getElementById("confirm-email").value.trim();
     const password = document.getElementById("password").value;
-
+    const confirmPassword = document.getElementById("confirm-password").value;
     const errorText = document.getElementById("error");
-
+    errorText.innerText = "";
     // เช็คค่าว่าง
-    if (name === "" || email === "" || password === "") {
+    if (!name || !email || !confirmEmail || !password || !confirmPassword) {
         errorText.innerText = "กรุณากรอกข้อมูลให้ครบทุกช่อง";
-        return false;
+        return;
     }
-
-    // เช็คอีเมลต้องมี @
-    if (!email.includes("@")) {
-        errorText.innerText = "รูปแบบอีเมลไม่ถูกต้อง";
-        return false;
+    // เช็คอีเมลต้องตรงกัน
+    if (email !== confirmEmail) {
+        errorText.innerText = "อีเมลไม่ตรงกัน";
+        return;
     }
 
     // เช็ครหัสผ่านอย่างน้อย 6 ตัว
     if (password.length < 6) {
         errorText.innerText = "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร";
-        return false;
+        return;
     }
+    // เช็ครหัสผ่านตรงกัน
+    if (password !== confirmPassword) {
+        errorText.innerText = "รหัสผ่านไม่ตรงกัน";
+        return;
+    }
+    alert("สมัครสมาชิกสำเร็จ");
 
-    // ถ้าผ่านทุกเงื่อนไข
-    alert("บันทึกข้อมูลเรียบร้อย");
-    return true;
+    // ถ้าต้องการให้ไปหน้า login
+    window.location.href = "../index.html";
 }
 </script>
 

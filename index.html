@@ -12,13 +12,13 @@
     <br>
     <div class="form-container max-w-4xl mx-auto my-5 px-10">
       <p class="title">เข้าสู่ระบบ</p>
-      <form class="form">
-        <input type="email" class="input" placeholder="อีเมล"  required>
-        <input type="password" class="input" placeholder="รหัสผ่าน" required>
+      <form class="form" onsubmit="validateForm(event)">
+        <input type="email" id="email" class="input" placeholder="อีเมล"  required>
+        <input type="password" id="password" class="input" placeholder="รหัสผ่าน" required>
         <p class="page-link">
           <span class="page-link-label">ลืมรหัสผ่าน</span>
         </p>
-        <button class="form-btn" type="submit" onclick="return validateForm()">เข้าสู่ระบบ</button>
+        <button class="form-btn" type="submit">เข้าสู่ระบบ</button>
       </form>
       <p class="sign-up-label">
         หรือยังไม่มีบัญชีผู้ใช้?<span class="sign-up-link"><a href="../register/register.html">สมัครสมาชิก</a></span>
@@ -40,22 +40,33 @@
         </div>
       </div>
     </div>
-<script>
-  function validateForm() {
 
-    // ตัวอย่างเช็คข้อมูล
+<script>
+function validateForm(event) {
+
+    event.preventDefault(); // หยุดการ submit ปกติ
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
     if (email === "" || password === "") {
         alert("กรุณากรอกข้อมูลให้ครบ");
-        return false;
+        return;
     }
+    if (password !== "123456") {
+    errorText.innerText = "รหัสไม่ถูกต้อง";
+    return;
+}
 
-    // ถ้าถูกต้อง ไปหน้าอื่น
-    window.location.href = "../Requirements-Front-end-group-21/Home page/Home page.html";
+    // ทดสอบก่อนว่า JS ทำงานไหม
+    console.log("กำลังไปหน้าใหม่...");
+
+    alert("เข้าสู่ระบบสำเร็จ");
+
+    // ไปหน้าอื่น
+    window.location.href = "../Home-page/Home-page.html";
 }
 </script>
+
 <!--Footer -->
 <footer class="text-center py-4 text-sm text-gray-500">
     © 2026 Hand In Paw Pethome
