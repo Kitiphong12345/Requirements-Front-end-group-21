@@ -3,22 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ผลิตภัณฑ์ดูแลสัตว์เลี้ยง</title>
+    <title>Arm & Hammer Dental Water Additive for Cats</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../Pet supplies/Pet supplies.css">
 </head>
-<body>
-    <!--หน้าเมนู-->
+<body class="bg-gray-100">
     <nav class="h-14 bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center gap-6 text-white font-bold">
         <a href="../Home-page/Home-page.html" class="hover:underline">หน้าหลัก</a>
         <a href="../category/category.html" class="hover:underline">หมวดหมู่สินค้า</a>
         <a href="../Shopping cart/Shopping cart.html" class="hover:underline">ตะกร้าสินค้า</a>
     </nav>
     <br>
-    
-    <section class="mb-16">
+    <div class="max-w-5xl mx-auto bg-white rounded-lg shadow-md p-6">
+        <div class="flex flex-col md:flex-row">
+            <img src="https://image.makewebcdn.com/makeweb/m_1920x0/EymvaO4rg/1armhammer/PETClub_armhammer_wateraddi_cat_0.jpg?v=202405291424" alt="Product Image" class="w-full md:w-1/2 h-auto rounded-lg mb-4 md:mb-0 md:mr-6">
+            <div class="md:w-1/2">
+                <h2 class="text-2xl font-bold mb-2">ชื่อสินค้า: Arm & Hammer Dental Water Additive for Cats - น้ำยาผสมน้ำสำหรับแมว 237มล.</h2>
+                <p class="font-bold mb-2">คุณสมบัติที่สำคัญ</p>
+                <p class="ml-4">✓ ช่วยป้องกันโรคเหงือกและกลิ่นปาก - สารเติมน้ำสำหรับแมวช่วยป้องกันโรคเหงือก กลิ่นปาก และการติดเชื้อในปาก</p>
+                <p class="ml-4">✓ ทำด้วยส่วนผสมจากธรรมชาติ - น้ำยาล้างฟันสำหรับแมวนี้ทำด้วยส่วนผสมจากธรรมชาติเพื่อช่วยให้มั่นใจถึงสุขภาพฟันที่ดีที่สุด</p>
+                <p class="ml-4">✓ อ่อนโยนแต่มีประสิทธิภาพ - การดูแลทันตกรรมอย่างอ่อนโยนและมีประสิทธิภาพสำหรับแมวของคุณมีความสำคัญต่อสุขภาพโดยรวม</p>
+                <p class="ml-4">✓ ช่วยให้ฟันของลูกแมวของคุณสดชื่น - สารเติมแต่งน้ำที่ไม่มีรสชาตินี้ผสมเบกกิ้งโซดาเพื่อกำจัดกลิ่นปาก</p>
+                <p class="ml-4">✓ วิธีใช้ที่ง่ายดาย - เติมหนึ่งฝาต่อน้ำดื่มของแมว 8 ออนซ์ วันละครั้ง ล้างชามน้ำของสัตว์เลี้ยงให้สะอาดก่อนเติมน้ำ</p>
+                <br>
+                <p class="text-xl font-semibold mb-4">ราคา: ฿295.00 บาท</p>
 
-        <h3 class="font-sans text-2xl text-center">ผลิตภัณฑ์ดูแลสัตว์เลี้ยง</h3>
+                <span class="font-semibold">จำนวน:</span>
+                <!--เพื่มและลดจำนวนสินค้า-->
+                <button onclick="decrease()"
+                    class="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">
+                    -
+                </button>
+
+                <span id="quantity" class="text-lg font-bold">1</span>
+
+                <button onclick="increase()"
+                    class="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">
+                    +
+                </button>
+                <button class="bg-gradient-to-r from-lime-500 to-lime-500 text-white font-bold py-2 px-4 rounded-md hover:bg-indigo-600 hover:to-lime-600 transition ease-in-out duration-150 justify-center ml-4">
+                    <a href="../Shopping cart/Shopping cart.html">สั่งซื้อสินค้า</a>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!--สินค้าที่แนะนำ-->
+    <section class="mb-16">
         <br>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 mx-auto w-3/4">
 
@@ -58,7 +88,7 @@
                 <a href="#" class="block font-medium">
                     Pawdy Shampoo EXTRAORDINARY WHITE พอดี้ แชมพูสุนัข สูตรขนขาว
                 </a>
-                <p class="mt-2 font-bold">฿290.00</p>
+                <p class="mt-2 font-bold">฿320.00</p>
             </div>
 
             <!-- สินค้า 4 -->
@@ -88,10 +118,30 @@
             </div>
         </div>
     </section>
-    
+<!--เพื่มและลดจำนวนสินค้า-->    
+<script>
+    let quantity = 1;
+
+    function increase() {
+        quantity++;
+        document.getElementById("quantity").innerText = quantity;
+    }
+
+    function decrease() {
+        if (quantity > 1) {
+            quantity--;
+            document.getElementById("quantity").innerText = quantity;
+        }
+    }
+
+    function addToCart() {
+        document.getElementById("message").innerText =
+            "เพิ่มสินค้า จำนวน " + quantity + " ชิ้น ลงตะกร้าแล้ว";
+    }
+</script>
 <!--Footer -->
 <footer class="text-center py-4 text-sm text-gray-500">
     © 2026 Hand In Paw Pethome
-</footer>    
+</footer>   
 </body>
 </html>
