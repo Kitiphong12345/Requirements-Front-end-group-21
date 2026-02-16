@@ -1,0 +1,12 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f6f4f4;
+}
+nav a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #333;
+}
+p.text-xl {
+    color: rgb(2, 177, 26);
+}
