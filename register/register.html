@@ -46,15 +46,12 @@ function validateForm(event) {
     const confirmEmail = document.getElementById("confirm-email").value.trim();
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirm-password").value;
-    const gender = document.getElementById("gender").valve;
+    const gender = document.getElementById("gender").value;
     const birthdate = document.getElementById("birthdate").value;
     const errorText = document.getElementById("error");
     errorText.innerText = "";
 
-    localStorage.setItem("name", name);
-    localStorage.setItem("email", email);
-    localStorage.setItem("gender", gender);
-    localStorage.setItem("birthdate", birthdate);
+
 
     // เช็คค่าว่าง
     if (!name || !email || !confirmEmail || !password || !confirmPassword) {
@@ -77,6 +74,14 @@ function validateForm(event) {
         errorText.innerText = "รหัสผ่านไม่ตรงกัน";
         return;
     }
+
+
+    localStorage.setItem("name", name);
+    localStorage.setItem("email", email);
+    localStorage.setItem("gender", gender);
+    localStorage.setItem("birthdate", birthdate);
+
+
     alert("สมัครสมาชิกสำเร็จ");
 
     // ถ้าต้องการให้ไปหน้า login

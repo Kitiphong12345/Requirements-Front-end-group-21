@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="profile.css">
 </head>
 <body>
-    <nav class="h-14 bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center gap-6 text-white font-bold">
+    <nav class="h-14 bg-gradient-to-r from-cyan-500 to-blue-400 flex items-center justify-center gap-6 text-white font-bold">
         <a href="../Home-page/Home-page.html" class="hover:underline">หน้าหลัก</a>
         <a href="../category/category.html" class="hover:underline">หมวดหมู่สินค้า</a>
         <a href="../Shopping cart/Shopping cart.html" class="hover:underline">ตะกร้าสินค้า</a>
@@ -43,16 +44,13 @@
     </div>
 
     <div class="mt-6 flex gap-3">
-        <button 
-            class="flex-1 bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition">
-            แก้ไขข้อมูล
-        </button>
 
         <button 
             onclick="logout()"
             class="flex-1 bg-red-500 text-white py-2 rounded hover:bg-red-600 transition">
             ออกจากระบบ
         </button>
+
     </div>
 
 </div>
@@ -71,6 +69,8 @@ window.onload = function() {
     document.getElementById("profile-gender").innerText = gender;
     document.getElementById("profile-birthdate").innerText = birthdate;
     document.getElementById("profile-password").innerText = password;
+
+    
 };
 
 function logout() {
