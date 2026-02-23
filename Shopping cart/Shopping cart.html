@@ -36,7 +36,7 @@
         </div>
 
         <!-- สินค้า 1 -->
-        <div class="grid grid-cols-5 items-center text-center mb-4">
+        <div class="grid grid-cols-5 items-center text-center mb-4 cart-item">
             <div class="col-span-2 flex items-center gap-4 text-left">
                 <img src="https://pawdy.co.th/wp-content/uploads/2024/01/Mockup-Matulity-Senior-7-font-1-768x768.jpg"
                      alt="Pawdy Senior"
@@ -55,9 +55,9 @@
             </div>
             
             <!-- ปุ่มลบ -->
-            <div class="flex items-center gap-3">
-                <button onclick="removeItem('item1')" class="bg-sky-50 hover:bg-rose-500 text-white px-1 py-1 rounded">
-                <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="ลบ" class="w-4 h-4">
+            <div class="flex items-center gap-3" id="cart-container">
+                <button onclick="removeItem(this)" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="ลบ" class="w-4 h-4">
                 </button>
             </div>            
             <br>
@@ -65,7 +65,7 @@
         </div>
 
         <!-- สินค้า 2 -->
-        <div class="grid grid-cols-5 items-center text-center">
+        <div class="grid grid-cols-5 items-center text-center mb-4 cart-item">
             <div class="col-span-2 flex items-center gap-4 text-left">
                 <img src="https://pawdy.co.th/wp-content/uploads/2024/02/Mockup-Holistic-Feline-_-Kitten-font-2-768x768.jpg"
                      alt="Pawdy Kitten"
@@ -83,8 +83,8 @@
                 <button class="qty-plus px-2 py-1 bg-gray-200 hover:bg-lime-500 rounded">+</button>
             </div>
             <!-- ปุ่มลบ -->
-            <div class="flex items-center gap-3">
-                    <button onclick="removeItem('item2')" class="bg-sky-50 hover:bg-rose-500 text-white px-1 py-1 rounded">
+            <div class="flex items-center gap-3" id="cart-container">
+                    <button onclick="removeItem(this)" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">
                     <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="ลบ" class="w-4 h-4">
                     </button>
             </div> 
@@ -126,28 +126,35 @@
 
         <div class="flex justify-between font-bold text-lg border-t pt-2">
             <span id="payment-method-label" >ช่องทางการชำระเงิน</span>
-            
+            <span id="payment-method">เก็บเงินปลายทาง</span>
         </div>
 
         <!-- ตัวเลือกการชำระเงิน -->
         <div class="mt-6 flex justify-end gap-4">
+
             <!-- ปลายทาง -->
-            <label class="flex items-center gap-2 border p-4 rounded cursor-pointer">
-                <input type="radio" name="payment" value="ชำระเงินปลายทาง" checked class="mr-2">
-                <span class="font-semibold">เก็บเงินปลายทาง</span>
-            </label>
+             
+                <label class="flex items-center gap-2 border p-4 rounded cursor-pointer">
+                    <input type="radio" name="payment" onclick="selectPayment('เก็บเงินปลายทาง')" checked>
+                    <span class="font-semibold">เก็บเงินปลายทาง</span>
+                </label>
             
+
             <!-- โอนผ่านธนาคาร -->
-            <label class="flex items-center gap-2 border p-4 rounded cursor-pointer">
-                <input type="radio" name="payment" value="bank" onclick="showPayment('bank')" checked>
-                <span class="font-semibold">โอนผ่านธนาคาร</span>
-            </label>
+             
+                <label class="flex items-center gap-2 border p-4 rounded cursor-pointer">
+                    <input type="radio" name="payment" onclick="selectPayment('โอนผ่านธนาคาร')">
+                    <span class="font-semibold">โอนผ่านธนาคาร</span>
+                </label>
+            
 
             <!-- พร้อมเพย์ -->
-            <label class="flex items-center gap-2 border p-4 rounded cursor-pointer">
-                <input type="radio" name="payment" value="promptpay" onclick="showPayment('promptpay')">
-                <span class="font-semibold">พร้อมเพย์</span>
-            </label>
+             
+                <label class="flex items-center gap-2 border p-4 rounded cursor-pointer">
+                    <input type="radio" name="payment" onclick="selectPayment('พร้อมเพย์')">
+                    <span class="font-semibold">พร้อมเพย์</span>
+                </label>
+             
         </div>
 
         <div class="mt-6 flex justify-end gap-4">
@@ -172,62 +179,68 @@
 </footer>
 
 <script>
-        const plusBtns = document.querySelectorAll(".qty-plus");
-        const minusBtns = document.querySelectorAll(".qty-minus");
-        const shippingCost = 50;
 
-        function updateCart() {
+    const shippingCost = 50;
+
+    // อัปเดตราคา
+    function updateCart() {
         let subtotal = 0;
+        let totalQty = 0;
 
-        document.querySelectorAll(".qty").forEach(qtyEl => {
-            const price = parseInt(qtyEl.dataset.price);
-            const qty = parseInt(qtyEl.textContent);
+    document.querySelectorAll(".qty").forEach(qtyEl => {
+        const price = parseInt(qtyEl.dataset.price);
+        const qty = parseInt(qtyEl.textContent);
+        const itemTotal = price * qty;
+            qtyEl.closest(".cart-item")
+                 .querySelector(".item-total")
+                .textContent = "฿" + itemTotal;
 
-            const itemTotal = price * qty;
-            qtyEl.closest(".grid").querySelector(".item-total").textContent = "฿" + itemTotal;
+        subtotal += itemTotal;
+        totalQty += qty;
+    });
 
-            subtotal += itemTotal;
-         });
+    document.getElementById("subtotal").textContent = "฿" + subtotal;
+    document.getElementById("grand-total").textContent = "฿" + (subtotal + shippingCost);
+    document.getElementById("item-count").textContent = totalQty + " ชิ้น";
+    }
 
-        document.getElementById("subtotal").textContent = "฿" + subtotal;
-        document.getElementById("grand-total").textContent = "฿" + (subtotal + shippingCost);
-        }
-
-        // + เพิ่มจำนวน
-        plusBtns.forEach(btn => {
-            btn.addEventListener("click", () => {
+    // ปุ่ม +
+    document.querySelectorAll(".qty-plus").forEach(btn => {
+        btn.addEventListener("click", () => {
             const qtyEl = btn.previousElementSibling;
             qtyEl.textContent = parseInt(qtyEl.textContent) + 1;
             updateCart();
-            });
         });
+    });
 
-        // - ลดจำนวน
-        minusBtns.forEach(btn => {
-            btn.addEventListener("click", () => {
+    // ปุ่ม -
+    document.querySelectorAll(".qty-minus").forEach(btn => {
+        btn.addEventListener("click", () => {
             const qtyEl = btn.nextElementSibling;
             let qty = parseInt(qtyEl.textContent);
             if (qty > 1) {
                 qtyEl.textContent = qty - 1;
                 updateCart();
             }
-            });
         });
+    });
 
-        function showPayment(type) {
-        document.getElementById("bank").classList.add("hidden");
-        document.getElementById("promptpay").classList.add("hidden");
-        document.getElementById("card").classList.add("hidden");
+    // ลบสินค้า (ลบทั้งแถว)
+    function removeItem(btn) {
+        btn.closest(".cart-item").remove();
+        updateCart();
+    }
 
-        document.getElementById(type).classList.remove("hidden");
-        }
+    // แสดงช่องทางชำระเงิน
+    function selectPayment(method) {
+        document.getElementById("payment-method").innerText = method;
+    }
 
-        function confirmPayment() {
+    // ชำระเงิน
+    function confirmPayment() {
         alert("ทำรายการชำระเงินเรียบร้อย");
-        }
-    //โหลดครั้งแรก
-    updateCart();
-    </script>
+    }
+</script>
 
     <script>
         function selectPayment(method) {
