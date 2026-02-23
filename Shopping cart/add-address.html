@@ -1,11 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เพิ่มที่อยู่</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เพิ่มที่อยู่</title>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+<div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+
+    <h2 class="text-xl font-bold text-center mb-4">เพิ่มที่อยู่</h2>
+
+    <form onsubmit="saveAddress(event)" class="flex flex-col gap-3">
+
+        <input type="text" id="fullname" placeholder="ชื่อ-นามสกุล"
+            class="bg-gray-100 p-2 rounded" required>
+
+        <input type="text" id="phone" placeholder="เบอร์โทรศัพท์"
+            class="bg-gray-100 p-2 rounded" required>
+
+        <textarea id="address" placeholder="ที่อยู่ (บ้านเลขที่ / ถนน / หมู่บ้าน)"
+            class="bg-gray-100 p-2 rounded" required></textarea>
+
+        <input type="text" id="district" placeholder="อำเภอ / เขต"
+            class="bg-gray-100 p-2 rounded" required>
+
+        <input type="text" id="province" placeholder="จังหวัด"
+            class="bg-gray-100 p-2 rounded" required>
+
+        <input type="text" id="zipcode" placeholder="รหัสไปรษณีย์"
+            class="bg-gray-100 p-2 rounded" maxlength="5" required>
+
+        <button type="submit"
+            class="bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition">
+            บันทึกที่อยู่
+        </button>
+
+        <p id="error" class="text-red-500 text-sm text-center"></p>
+    </form>
+
+    <hr class="my-4">
+   
+</div>
+
+<script>
+function saveAddress(event) {
+
+    event.preventDefault();
+
+    const fullname = document.getElementById("fullname").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const district = document.getElementById("district").value.trim();
+    const province = document.getElementById("province").value.trim();
+    const zipcode = document.getElementById("zipcode").value.trim();
+    const errorText = document.getElementById("error");
+
+    errorText.innerText = "";
+
+    if (!fullname || !phone || !address || !district || !province || !zipcode) {
+        errorText.innerText = "กรุณากรอกข้อมูลให้ครบทุกช่อง";
+        return;
+    }
+
+    if (zipcode.length !== 5 || isNaN(zipcode)) {
+        errorText.innerText = "รหัสไปรษณีย์ต้องเป็นตัวเลข 5 หลัก";
+        return;
+    }
+
+    // บันทึกลง localStorage
+    const addressData = {
+        fullname,
+        phone,
+        address,
+        district,
+        province,
+        zipcode
+    };
+
+    localStorage.setItem("address", JSON.stringify(addressData));
+
+    alert("บันทึกที่อยู่สำเร็จ");
+
+    displayAddress();
+}
+
+function displayAddress() {
+
+    const saved = JSON.parse(localStorage.getItem("address"));
+    const container = document.getElementById("saved-address");
+
+    if (!saved) {
+        container.innerHTML = "ยังไม่มีข้อมูลที่อยู่";
+        return;
+    }
+
+    container.innerHTML = `
+        <p><strong>ชื่อ:</strong> ${saved.fullname}</p>
+        <p><strong>เบอร์:</strong> ${saved.phone}</p>
+        <p><strong>ที่อยู่:</strong> ${saved.address}</p>
+        <p><strong>อำเภอ:</strong> ${saved.district}</p>
+        <p><strong>จังหวัด:</strong> ${saved.province}</p>
+        <p><strong>รหัสไปรษณีย์:</strong> ${saved.zipcode}</p>
+    `;
+}
+
+window.onload = displayAddress;
+</script>
+
 </body>
 </html>
