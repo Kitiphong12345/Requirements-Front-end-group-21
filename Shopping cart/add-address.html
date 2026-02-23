@@ -12,7 +12,7 @@
     <nav class="h-14 bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center gap-6 text-white font-bold">
         <a href="../Home-page/Home-page.html" class="hover:underline">หน้าหลัก</a>
         <a href="../category/category.html" class="hover:underline">หมวดหมู่สินค้า</a>
-        <a href="../Shopping cart/Shopping cart.html" class="hover:underline">ตะกร้าสินค้า</a>
+        <a href="../Shopping cart/Shopping-cart.html" class="hover:underline">ตะกร้าสินค้า</a>
         <a href="../Profile/profile.html" class="hover:underline">
             <img src="https://tse1.mm.bing.net/th/id/OIP.2FAQg06FvvfETwJis8vFvwHaHa?cb=defcachec2&w=626&h=626&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Company logo" title="profile" class="h-full w-12 rounded-xl">
         </a>
@@ -25,7 +25,7 @@
         <form onsubmit="saveAddress(event)" class="flex flex-col gap-3">
 
             <input type="text" id="fullname" placeholder="ชื่อ-นามสกุล" class="bg-gray-100 p-2 rounded" required>
-            <input type="text" id="phone" placeholder="เบอร์โทรศัพท์" class="bg-gray-100 p-2 rounded" required>
+            <input type="text" id="phone" placeholder="เบอร์โทรศัพท์" class="bg-gray-100 p-2 rounded" maxlength="10" required>
             <textarea id="address" placeholder="ที่อยู่ (บ้านเลขที่ / ถนน / หมู่บ้าน)"
             class="bg-gray-100 p-2 rounded" required></textarea>
             <input type="text" id="district" placeholder="อำเภอ / เขต"
@@ -82,6 +82,7 @@ function saveAddress(event) {
     alert("บันทึกที่อยู่สำเร็จ");
 
     displayAddress();
+    window.location.href = "Shopping-cart.html";
 }
 
 function displayAddress() {
@@ -106,7 +107,9 @@ function displayAddress() {
 
 window.onload = function() {
     displayAddress();
+    return false;
 };
+
 </script>
 
 </body>
