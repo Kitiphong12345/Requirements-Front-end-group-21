@@ -81,8 +81,7 @@ function saveAddress(event) {
 
     alert("บันทึกที่อยู่สำเร็จ");
 
-    displayAddress();
-    window.location.href = "Shopping-cart.html";
+    window.location.href = "../Shopping cart/Shopping-cart.html";
 }
 
 function displayAddress() {
@@ -105,8 +104,17 @@ function displayAddress() {
     `;
 }
 
+localStorage.setItem("address", JSON.stringify({
+    fullname: "สมชาย ใจดี",
+    phone: "0812345678",
+    address: "123 หมู่บ้านสุขใจ ถนนสุขสันต์",
+    district: "เมือง",
+    province: "กรุงเทพมหานคร",
+    zipcode: "10100"
+}));
+
 window.onload = function() {
-    displayAddress();
+
     return false;
 };
 

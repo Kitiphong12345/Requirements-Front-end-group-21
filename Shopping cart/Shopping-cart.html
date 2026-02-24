@@ -18,14 +18,14 @@
     </nav>
     <br>
     
-<!--Main -->
+
 <main class="max-w-4xl mx-auto my-5 px-10">
 
     <h1 class="text-2xl font-bold mb-6 text-center">
         ตะกร้าสินค้าของคุณ
     </h1>
 
-    <!--รายการสินค้า -->
+    <!--รายการสินค้า-->
     <section class="bg-white shadow-md rounded-lg p-10 mb-6 ">
 
         <!-- หัวตาราง -->
@@ -35,7 +35,7 @@
             <div>จำนวน</div>
         </div>
 
-        <!-- สินค้า 1 -->
+        <!--สินค้า1-->
         <div class="grid grid-cols-5 items-center text-center mb-4 cart-item">
             <div class="col-span-2 flex items-center gap-4 text-left">
                 <img src="https://pawdy.co.th/wp-content/uploads/2024/01/Mockup-Matulity-Senior-7-font-1-768x768.jpg"
@@ -54,7 +54,7 @@
                 <button class="qty-plus px-2 py-1 bg-gray-200 hover:bg-lime-500 rounded">+</button>
             </div>
             
-            <!-- ปุ่มลบ -->
+            <!--ปุ่มลบ-->
             <div class="flex items-center gap-3" id="cart-container">
                 <button onclick="removeItem(this)" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">
                     <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="ลบ" class="w-4 h-4">
@@ -64,7 +64,7 @@
             <p>ราคารวมสินค้า:</p><div class="item-total font-bold">฿350</div>
         </div>
 
-        <!-- สินค้า 2 -->
+        <!--สินค้า2-->
         <div class="grid grid-cols-5 items-center text-center mb-4 cart-item">
             <div class="col-span-2 flex items-center gap-4 text-left">
                 <img src="https://pawdy.co.th/wp-content/uploads/2024/02/Mockup-Holistic-Feline-_-Kitten-font-2-768x768.jpg"
@@ -82,7 +82,7 @@
                 <span class="qty" data-price="450">1</span>
                 <button class="qty-plus px-2 py-1 bg-gray-200 hover:bg-lime-500 rounded">+</button>
             </div>
-            <!-- ปุ่มลบ -->
+            <!--ปุ่มลบ-->
             <div class="flex items-center gap-3" id="cart-container">
                     <button onclick="removeItem(this)" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">
                     <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="ลบ" class="w-4 h-4">
@@ -95,7 +95,7 @@
 
     </section>
 
-    <!--สรุปราคา -->
+    <!--สรุปราคา-->
     <section class="bg-white shadow-md rounded-lg p-4">
 
         <div class="flex justify-between mb-2">
@@ -133,12 +133,16 @@
             <a href="../Shopping cart/add-address.html" class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
                 เพิ่มที่อยู่
             </a>
+        <!--ที่อยู่ที่บันทึกจะแสดงที่นี่-->
+        <div id="saved-address" class="mt-4 p-4 bg-gray-100 rounded">
         </div>
+        
+            
 
         <!-- ตัวเลือกการชำระเงิน -->
         <div class="mt-6 flex justify-end gap-4">
 
-            <!-- ปลายทาง -->
+            <!--ปลายทาง-->
              
                 <label class="flex items-center gap-2 border p-4 rounded cursor-pointer">
                     <input type="radio" name="payment" onclick="selectPayment('เก็บเงินปลายทาง')" checked>
@@ -146,7 +150,7 @@
                 </label>
             
 
-            <!-- โอนผ่านธนาคาร -->
+            <!--โอนผ่านธนาคาร-->
              
                 <label class="flex items-center gap-2 border p-4 rounded cursor-pointer">
                     <input type="radio" name="payment" onclick="selectPayment('โอนผ่านธนาคาร')">
@@ -246,6 +250,20 @@
     function confirmPayment() {
         alert("ทำรายการชำระเงินเรียบร้อย");
     }
+    <!-- ดึงข้อมูลที่อยู่จาก localStorage หน้า address-->
+    window.onload = function() {
+        const savedAddress = JSON.parse(localStorage.getItem("address"));
+        if (savedAddress) {
+            document.getElementById("saved-address").innerHTML = `
+                <p><strong>ชื่อ:</strong> ${savedAddress.fullname}</p>
+                <p><strong>เบอร์:</strong> ${savedAddress.phone}</p>
+                <p><strong>ที่อยู่:</strong> ${savedAddress.address}</p>
+                <p><strong>อำเภอ:</strong> ${savedAddress.district}</p>
+                <p><strong>จังหวัด:</strong> ${savedAddress.province}</p>
+                <p><strong>รหัสไปรษณีย์:</strong> ${savedAddress.zipcode}</p>
+            `;
+        }
+    };
 </script>
 
     <script>
