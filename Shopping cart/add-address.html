@@ -12,7 +12,9 @@
     <nav class="h-14 bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center gap-6 text-white font-bold">
         <a href="../Home-page/Home-page.html" class="hover:underline">หน้าหลัก</a>
         <a href="../category/category.html" class="hover:underline">หมวดหมู่สินค้า</a>
-        <a href="../Shopping cart/Shopping-cart.html" class="hover:underline">ตะกร้าสินค้า</a>
+        <a href="../Shopping cart/Shopping-cart.html" class="hover:underline">
+            <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="cart icon" class="w-6 inline-block ml-1">
+        </a>
         <a href="../Profile/profile.html" class="hover:underline">
             <img src="https://tse1.mm.bing.net/th/id/OIP.2FAQg06FvvfETwJis8vFvwHaHa?cb=defcachec2&w=626&h=626&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Company logo" title="profile" class="h-full w-12 rounded-xl">
         </a>
@@ -95,12 +97,12 @@ function displayAddress() {
     }
     
     container.innerHTML = `
-        <p><strong>ชื่อ:</strong> ${saved.fullname}</p>
-        <p><strong>เบอร์:</strong> ${saved.phone}</p>
-        <p><strong>ที่อยู่:</strong> ${saved.address}</p>
-        <p><strong>อำเภอ:</strong> ${saved.district}</p>
-        <p><strong>จังหวัด:</strong> ${saved.province}</p>
-        <p><strong>รหัสไปรษณีย์:</strong> ${saved.zipcode}</p>
+        <p><strong>ชื่อ:กรุณาเพิ่มชื่อ</strong> ${saved.fullname}</p>
+        <p><strong>เบอร์:กรุณาเพิ่มเบอร์โทรศัพท์</strong> ${saved.phone}</p>
+        <p><strong>ที่อยู่:กรุณาเพิ่มที่อยู่</strong> ${saved.address}</p>
+        <p><strong>อำเภอ:กรุณาเพิ่มที่อยู่อำเภอ</strong> ${saved.district}</p>
+        <p><strong>จังหวัด:กรุณาเพิ่มที่อยู่จังหวัด</strong> ${saved.province}</p>
+        <p><strong>รหัสไปรษณีย์:กรุณาเพิ่มรหัสไปรษณีย์</strong> ${saved.zipcode}</p>
     `;
 }
 
