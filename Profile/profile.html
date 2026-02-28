@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="profile.css">
 </head>
 <body>
+    // เมนูนำทาง
     <nav class="h-14 bg-gradient-to-r from-cyan-500 to-blue-400 flex items-center justify-center gap-6 text-white font-bold">
         <a href="../Home-page/Home-page.html" class="hover:underline">หน้าหลัก</a>
         <a href="../category/category.html" class="hover:underline">หมวดหมู่สินค้า</a>
@@ -58,7 +59,7 @@
 </div>
 </section>
 <script>
-// ตัวอย่างดึงข้อมูลจาก localStorage
+// การโหลดข้อมูลโปรไฟล์จาก localStorage และแสดงผลบนหน้าโปรไฟล์
 window.onload = function() {
     const name = localStorage.getItem("name") || "ชื่อผู้ใช้";
     const email = localStorage.getItem("email") || "user@gmail.com";
