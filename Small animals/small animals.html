@@ -10,27 +10,31 @@
 <body>
     <!--เมนูต่างๆ-->
     <nav class="h-14 bg-gradient-to-r from-cyan-500 to-blue-400 flex items-center justify-center gap-6  font-bold">
-        <a href="../Home-page/Home-page.html" class="hover:underline">หน้าหลัก</a>
-            <select class="col-start-1 row-start-1 appearance-none bg-gradient-to-r from-cyan-500 to-blue-400 text-center w-40" aria-label="หมวดหมู่สินค้า">
+        <a href="../Home-page/Home-page.html" class="hover:underline">
+            <img src="https://e7.pngegg.com/pngimages/769/771/png-clipart-computer-icons-house-building-home-house-angle-building.png" alt="Company logo" title="Home" class="h-full w-12 rounded-xl">
+        </a>
+            <select class="rounded-xl col-start-1 row-start-1 appearance-none  text-center w-40" aria-label="หมวดหมู่สินค้า">
                 <option value="หมวดหมู่สินค้า" disabled selected class="hidden">หมวดหมู่สินค้า</option>
-                <option value="../category/category.html">ทั้งหมด</option>
-                <option value="อาหารสุนัข">อาหารสุนัข</option>
-                <option value="อาหารแมว">อาหารแมว</option>
-                <option value="อาหารสัตว์เล็กและสัตว์ขนาดเล็ก">อาหารสัตว์เล็กและสัตว์ขนาดเล็ก</option>
-                <option value="ของเล่นสัตว์เลี้ยง">ของเล่นสัตว์เลี้ยง</option>
-                <option value="กระเป๋า/รถเข็น">กระเป๋า/รถเข็น</option>
+                <option value="../category/category.html">สินค้าทั้งหมด</option>
+                <option value="../dog_food/dog.html">อาหารสุนัข</option>
+                <option value="../cat_food/Cat.html">อาหารแมว</option>
+                <option value="../Small animals/small animals.html">อาหารสัตว์เล็ก</option>
+                <option value="../Pet care products/Pet care products.html">ผลิตภัณฑ์สัตว์เลี้ยง</option>
+                <option value="../Pet toys/Pet toys.html">ของเล่นสัตว์เลี้ยง</option>
+                <option value="../Pet supplies/Pet supplies.html">กระเป๋า/รถเข็น</option>
             </select>
 
             <script>
-                function goToPage(select) {
-                    const url = select.value;
-                    if (url) {
-                        window.location.href = url;
+                const categorySelect = document.querySelector('select[aria-label="หมวดหมู่สินค้า"]');
+                categorySelect.addEventListener('change', function() {
+                    const selectedValue = this.value;
+                    if (selectedValue) {
+                        window.location.href = selectedValue;
                     }
-                }
+                });
             </script>
         
-        <a href="../shopping-cart/shopping-cart.html" class="hover:underline">
+        <a href="../Shopping cart/Shopping-cart.html" class="hover:underline">
             <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="cart icon" class="w-6 inline-block ml-1">
         </a>
         <a href="../Profile/profile.html" class="hover:underline flex items-center gap-2">
@@ -109,6 +113,7 @@
             </div>
         </div>
     </section>
+
 <!--Footer -->
 <footer class="text-center py-4 text-sm text-gray-500">
     © 2026 Hand In Paw Pethome
