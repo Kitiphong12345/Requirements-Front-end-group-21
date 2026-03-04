@@ -77,14 +77,3 @@ Pictures/ → รูปภาพสินค้าและรูปประก
 Front-End Project – Group 21
 สาขา/รายวิชา: Requirements-Front-end
 
-🔮 แนวทางพัฒนาต่อในอนาคต
-
-เพิ่มระบบตะกร้าสินค้า (Shopping Cart)
-
-เพิ่มระบบ Login / Register
-
-เชื่อมต่อฐานข้อมูล (Back-End)
-
-ทำเว็บไซต์แบบ Responsive เต็มรูปแบบ
-
-เพิ่มระบบค้นหาสินค้า
