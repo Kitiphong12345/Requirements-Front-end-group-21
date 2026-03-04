@@ -75,7 +75,7 @@ Pictures/ → รูปภาพสินค้าและรูปประก
 👥 ผู้จัดทำ
 
 Front-End Project – Group 21
-สาขา/รายวิชา:Requirements-Front-end
+สาขา/รายวิชา: Requirements-Front-end
 
 🔮 แนวทางพัฒนาต่อในอนาคต
 
