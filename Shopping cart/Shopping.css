@@ -19,3 +19,6 @@ span#grand-total {
 div.item-total {
     color: rgb(2, 177, 26);
 }
+span#totalPrice {
+    color: rgb(2, 177, 26);
+}
