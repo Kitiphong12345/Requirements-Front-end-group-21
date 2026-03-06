@@ -53,70 +53,15 @@
     <section class="bg-white shadow-md rounded-lg p-10 mb-6 ">
 
         <!-- หัวตาราง -->
-        <div class="grid grid-cols-5 font-bold border-b pb-2 mb-4 text-center">
-            <div class="col-span-2 text-left">สินค้า</div>
-            <div>ราคาต่อชิ้น</div>
-            <div>จำนวน</div>
-        </div>
-
-        <!--สินค้า1-->
-        <div class="grid grid-cols-5 items-center text-center mb-4 cart-item">
-            <div class="col-span-2 flex items-center gap-4 text-left">
-                <img src="https://pawdy.co.th/wp-content/uploads/2024/01/Mockup-Matulity-Senior-7-font-1-768x768.jpg"
-                     alt="Pawdy Senior"
-                     class="w-20 h-20 object-cover rounded">
-                <span class="font-semibold">
-                    Pawdy Senior 7+ อาหารสุนัขสูงวัย
-                </span>
-            </div>
-            
-            <div>฿350</div>
-            
-            <!--จำนวนสินค้า-->
-            <div class="flex justify-center items-center gap-2">
-                <button class="qty-minus px-2 py-1 bg-gray-200 hover:bg-rose-500 rounded">-</button>
-                <span class="qty" data-price="350">1</span>
-                <button class="qty-plus px-2 py-1 bg-gray-200 hover:bg-lime-500 rounded">+</button>
-            </div>
-            
-            <!--ปุ่มลบ-->
-            <div class="flex items-center gap-3" id="cart-container">
-                <button onclick="removeItem(this)" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="ลบ" class="w-4 h-4">
-                </button>
-            </div>            
-            <br>
-            <p>ราคารวมสินค้า:</p><div class="item-total font-bold">฿350</div>
-        </div>
-
-        <!--สินค้า2-->
-        <div class="grid grid-cols-5 items-center text-center mb-4 cart-item">
-            <div class="col-span-2 flex items-center gap-4 text-left">
-                <img src="https://pawdy.co.th/wp-content/uploads/2024/02/Mockup-Holistic-Feline-_-Kitten-font-2-768x768.jpg"
-                     alt="Pawdy Kitten"
-                     class="w-20 h-20 object-cover rounded">
-                <span class="font-semibold">
-                    Pawdy Holistic อาหารลูกแมว
-                </span>
+        <div class="cart-items mb-6">
+            <div class="grid grid-cols-5 font-bold border-b pb-2 mb-4 text-center">
+                <div class="col-span-2 text-left">สินค้า</div>
+                <div>ราคาต่อชิ้น</div>
+                <div>จำนวน</div>
+                <div>ลบ</div>
             </div>
 
-            <div>฿450</div>
-
-            <!--จำนวนสินค้า-->
-            <div class="flex justify-center items-center gap-2">
-                <button class="qty-minus px-2 py-1 bg-gray-200 hover:bg-rose-500 rounded">-</button>
-                <span class="qty" data-price="450">1</span>
-                <button class="qty-plus px-2 py-1 bg-gray-200 hover:bg-lime-500 rounded">+</button>
-            </div>
-
-            <!--ปุ่มลบ-->
-            <div class="flex items-center gap-3" id="cart-container">
-                    <button onclick="removeItem(this)" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" alt="ลบ" class="w-4 h-4">
-                    </button>
-            </div> 
-            <br>
-            <p>ราคารวมสินค้า:</p><div class="item-total font-bold">฿450</div>
+            <ul id="cartList"></ul>
 
         </div>
 
@@ -126,23 +71,12 @@
     <section class="bg-white shadow-md rounded-lg p-4">
 
         <div class="flex justify-between mb-2">
-            <span>จำนวนสินค้า</span>
-            <span id="item-count">2 ชิ้น</span>
-        </div>
-
-        <div class="flex justify-between mb-2">
-            <span>ราคารวมสินค้า</span>
-            <span id="subtotal">฿800</span>
-        </div>
-
-        <div class="flex justify-between mb-2">
-            <span>ค่าจัดส่ง</span>
-            <span id="shipping">฿50</span>
+            <p>ค่าจัดส่ง <span id="shipping">0</span> บาท</p>
         </div>
 
         <div class="flex justify-between font-bold text-lg border-t pt-2">
-            <span >รวมทั้งหมด</span>
-            <span id="grand-total">฿850</span>
+            <p>รวมทั้งหมด <span id="totalPrice">0</span> บาท</p>
+            
         </div>
 
         <div class="flex justify-between font-bold text-lg border-t pt-2">
@@ -210,80 +144,66 @@
 
 <script>
 
-    const shippingCost = 50;
+    function renderCart(){
 
-    // อัปเดตราคา
-    function updateCart() {
-        let subtotal = 0;
-        let totalQty = 0;
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartList = document.getElementById("cartList");
+    const totalPrice = document.getElementById("totalPrice");
+    const shippingElement = document.getElementById("shipping");
 
-    document.querySelectorAll(".qty").forEach(qtyEl => {
-        const price = parseInt(qtyEl.dataset.price);
-        const qty = parseInt(qtyEl.textContent);
-        const itemTotal = price * qty;
-            qtyEl.closest(".cart-item")
-                 .querySelector(".item-total")
-                .textContent = "฿" + itemTotal;
+    const shipping = 10;
 
-        subtotal += itemTotal;
-        totalQty += qty;
+    cartList.innerHTML = "";
+
+    let total = 0;
+
+    cart.forEach((item,index)=>{
+
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+
+        cartList.innerHTML += `
+        <li class="grid grid-cols-5 items-center text-center mb-4">
+
+            <div class="col-span-2 flex items-center gap-4 text-left">
+                <img src="${item.image}" class="w-20 h-20 object-cover rounded">
+                <span class="font-semibold">${item.name}</span>
+            </div>
+
+            <div>฿${item.price}</div>
+
+            <div>${item.quantity}</div>
+
+            <div>
+                <button onclick="removeCartItem(${index})"
+                class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">
+                ลบ
+                </button>
+            </div>
+
+        </li>
+        `;
     });
 
-    document.getElementById("subtotal").textContent = "฿" + subtotal;
-    document.getElementById("grand-total").textContent = "฿" + (subtotal + shippingCost);
-    document.getElementById("item-count").textContent = totalQty + " ชิ้น";
-    }
+    shippingElement.innerText = shipping;
 
-    // ปุ่ม +
-    document.querySelectorAll(".qty-plus").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const qtyEl = btn.previousElementSibling;
-            qtyEl.textContent = parseInt(qtyEl.textContent) + 1;
-            updateCart();
-        });
-    });
+    total += shipping;
 
-    // ปุ่ม -
-    document.querySelectorAll(".qty-minus").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const qtyEl = btn.nextElementSibling;
-            let qty = parseInt(qtyEl.textContent);
-            if (qty > 1) {
-                qtyEl.textContent = qty - 1;
-                updateCart();
-            }
-        });
-    });
+    totalPrice.innerText = total;
+}
 
-    // ลบสินค้า (ลบทั้งแถว)
-    function removeItem(btn) {
-        btn.closest(".cart-item").remove();
-        updateCart();
-    }
+function removeCartItem(index){
 
-    // แสดงช่องทางชำระเงิน
-    function selectPayment(method) {
-        document.getElementById("payment-method").innerText = method;
-    }
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    // ชำระเงิน
-    function confirmPayment() {
-        alert("ทำรายการชำระเงินเรียบร้อย");
-    }
-    <!-- ดึงข้อมูลที่อยู่จาก localStorage หน้า address-->
-    window.onload = function() {
-        const savedAddress = JSON.parse(localStorage.getItem("address"));
-        if (savedAddress) {
-            document.getElementById("saved-address").innerHTML = `
-                <p><strong>ชื่อ:</strong> ${savedAddress.fullname}</p>
-                <p><strong>เบอร์:</strong> ${savedAddress.phone}</p>
-                <p><strong>ที่อยู่:</strong> ${savedAddress.address}</p>
-                <p><strong>อำเภอ:</strong> ${savedAddress.district}</p>
-                <p><strong>จังหวัด:</strong> ${savedAddress.province}</p>
-                <p><strong>รหัสไปรษณีย์:</strong> ${savedAddress.zipcode}</p>
-            `;
-        }
-    };
+    cart.splice(index,1);
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    renderCart();
+}
+
+renderCart();
 </script>
 
     <script>

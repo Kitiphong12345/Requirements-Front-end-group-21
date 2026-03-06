@@ -63,9 +63,10 @@
                     class="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400">
                     +
                 </button>
-                <a href="../Shopping cart/Shopping-cart.html" class="inline-block bg-gradient-to-r from-lime-500 to-lime-500 text-white font-bold py-2 px-4 rounded-md hover:bg-indigo-600 hover:to-lime-600 transition ease-in-out duration-150 ml-4">
-                    สั่งซื้อสินค้า
-                </a>
+                <button onclick="addToCart()"
+                class="inline-block bg-gradient-to-r from-lime-500 to-lime-500 text-white font-bold py-2 px-4 rounded-md ml-4">
+                สั่งซื้อสินค้า
+                </button>
             </div>
         </div>
     </div>
@@ -142,22 +143,59 @@
 <script>
     let quantity = 1;
 
-    function increase() {
-        quantity++;
+function increase() {
+    quantity++;
+    document.getElementById("quantity").innerText = quantity;
+}
+
+function decrease() {
+    if (quantity > 1) {
+        quantity--;
         document.getElementById("quantity").innerText = quantity;
     }
+}
 
-    function decrease() {
-        if (quantity > 1) {
-            quantity--;
-            document.getElementById("quantity").innerText = quantity;
-        }
+function addToCart() {
+
+    const product = {
+        name: "IBIYAYA รถเข็นสัตว์เลี้ยง รุ่น Liso สี Orange-Brown",
+        price: 4790,
+        quantity: quantity
+    };
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // เช็คว่ามีสินค้านี้แล้วไหม
+    let existing = cart.find(item => item.name === product.name);
+
+    if (existing) {
+        existing.quantity += quantity;
+    } else {
+        cart.push(product);
     }
 
-    function addToCart() {
-        document.getElementById("message").innerText =
-            "เพิ่มสินค้า จำนวน " + quantity + " ชิ้น ลงตะกร้าแล้ว";
-    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+}
+
+function addToCart(){
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const product = {
+        name: "ชื่อสินค้า: IBIYAYA รถเข็นสัตว์เลี้ยง รุ่น Liso สี Orange-Brown",
+        price: 4790,
+        image: "https://image.makewebcdn.com/makeweb/m_1920x0/EymvaO4rg/1ibiyaya/PETClub_ibiyaya_liso_orange_1.jpg?v=202405291424",
+        quantity: quantity
+    };
+
+    cart.push(product);
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert("เพิ่มสินค้าเรียบร้อย");
+
+}
 </script>
 <!--Footer -->
 <footer class="text-center py-4 text-sm text-gray-500">
