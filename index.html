@@ -29,30 +29,30 @@
 <script>
 function validateForm(event) {
 
-    event.preventDefault(); // หยุดการ submit ปกติ
+    event.preventDefault();
+
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const errorText = document.getElementById("errorText");
 
     errorText.innerText = "";
 
-    if (email === "" || password === "") {
-      errorText.innerText = "กรุณากรอกข้อมูลให้ครบ";
-        alert("กรุณากรอกข้อมูลให้ครบ");
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if(!user){
+        errorText.innerText = "ยังไม่มีบัญชีผู้ใช้";
         return;
     }
-    if (password !== "123456") {
-    errorText.innerText = "รหัสไม่ถูกต้อง";
-    return;
-}
 
-    // ทดสอบก่อนว่า JS ทำงานไหม
-    console.log("กำลังไปหน้าใหม่...");
+    if(email === user.email && password === user.password){
 
-    alert("เข้าสู่ระบบสำเร็จ");
+        alert("เข้าสู่ระบบสำเร็จ");
+        window.location.href = "./Home-page/Home-page.html";
 
-    // ไปหน้าอื่น
-    window.location.href = "./Home-page/Home-page.html";
+    }else{
+        errorText.innerText = "อีเมลหรือรหัสผ่านไม่ถูกต้อง";
+    }
+
 }
 </script>
 <br><br><br>

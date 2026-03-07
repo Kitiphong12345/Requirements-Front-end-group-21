@@ -50,6 +50,7 @@ function validateForm(event) {
     const confirmPassword = document.getElementById("confirm-password").value;
     const gender = document.getElementById("gender").value;
     const birthdate = document.getElementById("birthdate").value;
+    const surname = document.getElementById("surname").value.trim();
     const errorText = document.getElementById("error");
     errorText.innerText = "";
 
@@ -78,11 +79,33 @@ function validateForm(event) {
     }
 
     
-    localStorage.setItem("name", name);
-    localStorage.setItem("email", email);
-    localStorage.setItem("gender", gender);
-    localStorage.setItem("birthdate", birthdate);
+    const user = {
+    name: name,
+    surname: surname,
+    email: email,
+    password: password,
+    gender: gender,
+    birthdate: birthdate
+};
 
+localStorage.setItem("user", JSON.stringify(user));
+
+function registerUser(){
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const user = {
+        email: email,
+        password: password
+    };
+
+    localStorage.setItem("user", JSON.stringify(user));
+
+    alert("สมัครสมาชิกสำเร็จ");
+
+    window.location.href = "../index.html";
+}
 
     alert("สมัครสมาชิกสำเร็จ");
 
