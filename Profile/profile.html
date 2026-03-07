@@ -62,7 +62,7 @@
         </div>
         <div class="bg-gray-100 p-3 rounded">
             <span class="font-semibold">รหัสผ่าน:</span>
-            <span id="profile-password"></span>
+            <span id="profile-password">xxxxxx</span>
         </div>
     </div>
 
@@ -83,9 +83,21 @@
 window.onload = function() {
     const name = localStorage.getItem("name") || "ชื่อผู้ใช้";
     const email = localStorage.getItem("email") || "user@gmail.com";
-    const gender = localStorage.getItem("gender") || "ไม่ระบุ";
+    const gender = localStorage.getItem("gender");
     const birthdate = localStorage.getItem("birthdate") || "-";
     const password = localStorage.getItem("password") || "1xxxx";
+
+    let genderThai = "ไม่ระบุ";
+
+    if(genderValue === "male"){
+        genderThai = "ชาย";
+    }
+    else if(genderValue === "female"){
+        genderThai = "หญิง";
+    }
+    else if(genderValue === "other"){
+        genderThai = "อื่นๆ";
+    }
 
     document.getElementById("profile-name").innerText = name;
     document.getElementById("profile-email").innerText = email;
