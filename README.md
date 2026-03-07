@@ -27,6 +27,8 @@ HTML5
 
 CSS3
 
+javaScript (ไม่ได้สร้างไฟล์แยก)
+
 โครงสร้างแบบ Static Website
 
 (บางหน้ามีการใช้ Tailwind CSS ผ่าน CDN)
@@ -71,9 +73,3 @@ Pictures/ → รูปภาพสินค้าและรูปประก
 ฝึกการเชื่อมโยงหน้าเว็บ (Navigation & Linking)
 
 ฝึกออกแบบ UI เบื้องต้นด้วย CSS
-
-👥 ผู้จัดทำ
-
-Front-End Project – Group 21
-สาขา/รายวิชา: Requirements-Front-end
-
