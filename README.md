@@ -27,6 +27,8 @@ HTML5
 
 CSS3
 
+javaScript
+
 โครงสร้างแบบ Static Website
 
 (บางหน้ามีการใช้ Tailwind CSS ผ่าน CDN)
