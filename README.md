@@ -27,7 +27,7 @@ HTML5
 
 CSS3
 
-javaScript
+javaScript (ไม่ได้สร้างไฟล์แยก)
 
 โครงสร้างแบบ Static Website
 
