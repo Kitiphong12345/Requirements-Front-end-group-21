@@ -90,7 +90,6 @@ function saveAddress(event) {
         return;
     }
 
-    // บันทึกลง localStorage
     const addressData = {
         fullname,
         phone,
@@ -106,41 +105,6 @@ function saveAddress(event) {
 
     window.location.href = "../Shopping cart/Shopping-cart.html";
 }
-
-function displayAddress() {
-
-    const saved = JSON.parse(localStorage.getItem("address"));
-    const container = document.getElementById("saved-address");
-
-    if (!saved) {
-        container.innerHTML = "ยังไม่มีข้อมูลที่อยู่";
-        return;
-    }
-    
-    container.innerHTML = `
-        <p><strong>ชื่อ:กรุณาเพิ่มชื่อ</strong> ${saved.fullname}</p>
-        <p><strong>เบอร์:กรุณาเพิ่มเบอร์โทรศัพท์</strong> ${saved.phone}</p>
-        <p><strong>ที่อยู่:กรุณาเพิ่มที่อยู่</strong> ${saved.address}</p>
-        <p><strong>อำเภอ:กรุณาเพิ่มที่อยู่อำเภอ</strong> ${saved.district}</p>
-        <p><strong>จังหวัด:กรุณาเพิ่มที่อยู่จังหวัด</strong> ${saved.province}</p>
-        <p><strong>รหัสไปรษณีย์:กรุณาเพิ่มรหัสไปรษณีย์</strong> ${saved.zipcode}</p>
-    `;
-}
-
-localStorage.setItem("address", JSON.stringify({
-    fullname: "-",
-    phone: "-",
-    address: "-",
-    district: "-",
-    province: "-",
-    zipcode: "-"
-}));
-
-window.onload = function() {
-
-    return false;
-};
-
 </script>
 
 </body>

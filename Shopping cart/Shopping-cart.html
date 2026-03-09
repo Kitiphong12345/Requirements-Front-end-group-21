@@ -92,7 +92,7 @@
                 เพิ่มที่อยู่
             </a>
         <!--ที่อยู่ที่บันทึกจะแสดงที่นี่-->
-        <div id="saved-address" class="mt-4 p-4 bg-gray-100 rounded">
+        <div id="address" class="mt-4 p-4 bg-gray-100 rounded">
         </div>
         
             
@@ -153,6 +153,18 @@
     const cartList = document.getElementById("cartList");
     const totalPrice = document.getElementById("totalPrice");
     const shippingElement = document.getElementById("shipping");
+    const saved = JSON.parse(localStorage.getItem("address"));
+
+    if(saved){
+        document.getElementById("address").innerHTML = `
+        ชื่อ: ${saved.fullname}<br>
+        เบอร์: ${saved.phone}<br>
+        ที่อยู่: ${saved.address} <br>
+        อำเภอ/เขต: ${saved.district}<br>
+        จังหวัด: ${saved.province}<br>
+        รหัสไปรษณีย์: ${saved.zipcode}
+        `;
+    }
 
     const shipping = 10;
 
@@ -194,6 +206,7 @@
 
     totalPrice.innerText = total;
 }
+
 
 function removeCartItem(index){
 
