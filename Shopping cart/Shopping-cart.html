@@ -215,9 +215,35 @@ function removeCartItem(index){
     cart.splice(index,1);
 
     localStorage.setItem("cart", JSON.stringify(cart));
-
+    
+    
     renderCart();
 }
+
+function confirmPayment(){
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const address = JSON.parse(localStorage.getItem("address"));
+
+    if(cart.length === 0){
+        alert("ไม่มีสินค้าในตะกร้า");
+        return;
+    }
+
+    if(!address){
+        alert("กรุณาเพิ่มที่อยู่ก่อนชำระเงิน");
+        return;
+    }
+
+    alert("ขอบคุณสำหรับการสั่งซื้อ \nสินค้าของคุณจะถูกจัดส่งภายใน 3-5 วัน");
+
+    // ล้างตะกร้า
+    localStorage.removeItem("cart");
+
+    // รีเฟรชหน้า
+    renderCart();
+}
+
 
 renderCart();
 </script>
