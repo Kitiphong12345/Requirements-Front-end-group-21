@@ -231,17 +231,13 @@ function confirmPayment(){
     }
 
     if(!address){
-        alert("กรุณาเพิ่มที่อยู่ก่อนชำระเงิน");
+        alert("กรุณาเพิ่มที่อยู่ก่อน");
         return;
     }
 
-    alert("ขอบคุณสำหรับการสั่งซื้อ \nสินค้าของคุณจะถูกจัดส่งภายใน 3-5 วัน");
-
-    // ล้างตะกร้า
     localStorage.removeItem("cart");
 
-    // รีเฟรชหน้า
-    renderCart();
+    window.location.href = "./Payment_completed.html";
 }
 
 
