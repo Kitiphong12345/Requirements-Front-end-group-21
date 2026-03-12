@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 font-sans">
+
+<div class="max-w-5xl mx-auto p-6">
+
+<h1 class="text-2xl font-bold mb-6 text-center">
+Admin Dashboard
+</h1>
+
+<!-- สถิติ -->
+<div class="grid grid-cols-3 gap-4 mb-6">
+
+<div class="bg-white p-4 rounded shadow text-center">
+<p class="text-gray-500">จำนวนคำสั่งซื้อ</p>
+<p id="totalOrders" class="text-2xl font-bold">0</p>
+</div>
+
+<div class="bg-white p-4 rounded shadow text-center">
+<p class="text-gray-500">จำนวนสินค้า</p>
+<p id="totalItems" class="text-2xl font-bold">0</p>
+</div>
+
+<div class="bg-white p-4 rounded shadow text-center">
+<p class="text-gray-500">ยอดขายรวม</p>
+<p id="totalSales" class="text-2xl font-bold">0</p>
+</div>
+
+</div>
+
+<!-- รายการคำสั่งซื้อ -->
+<h2 class="text-xl font-bold mb-3">
+รายการคำสั่งซื้อ
+</h2>
+
+<div id="orderList" class="space-y-4"></div>
+
+</div>
+
+<script>
+
+function loadAdmin(){
+
+const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+const orderList = document.getElementById("orderList");
+const totalOrders = document.getElementById("totalOrders");
+const totalItems = document.getElementById("totalItems");
+const totalSales = document.getElementById("totalSales");
+
+let itemsCount = 0;
+let sales = 0;
+
+totalOrders.innerText = orders.length;
+
+orders.forEach(order=>{
+
+let itemsHTML = "";
+
+order.items.forEach(item=>{
+
+itemsCount += item.quantity;
+sales += item.price * item.quantity;
+
+itemsHTML += `
+<div class="flex justify-between border-b py-1">
+<span>${item.name} x ${item.quantity}</span>
+<span>฿${item.price * item.quantity}</span>
+</div>
+`;
+
+});
+
+orderList.innerHTML += `
+
+<div class="bg-white p-4 rounded shadow">
+
+<p class="font-bold">Order: ${order.id}</p>
+<p class="text-sm text-gray-500">${order.date}</p>
+
+<div class="mt-2">
+${itemsHTML}
+</div>
+
+<div class="mt-2 text-sm">
+<p>ลูกค้า: ${order.address.fullname}</p>
+<p>ที่อยู่: ${order.address.address}</p>
+</div>
+
+<p class="mt-2 text-blue-600">${order.status}</p>
+
+</div>
+
+`;
+
+});
+
+totalItems.innerText = itemsCount;
+totalSales.innerText = "฿" + sales;
+
+}
+
+loadAdmin();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="admin.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-cyan-500 to-amber-200 flex items-center justify-center min-h-screen">
+
+    <div class="form-container max-w-4xl mx-auto my-5 px-5 py-1 bg-white rounded-lg shadow-md">
+      <img src="../Pictures/489155c0-8023-4e62-9c58-345a203488d6.png" alt="Logo" class="h-32 mx-auto mb-4 rounded-lg">
+      <p class="title">เข้าสู่ระบบ Admin</p>
+        <form class="form" onsubmit="loginAdmin(event)">
+                <input type="text" id="username" class="input" placeholder="ชื่อผู้ใช้" required>
+                <input type="password" id="password" class="input" placeholder="รหัสผ่าน" required>
+
+                <p id="errorText" class="text-red-500 text-sm text-center"></p>
+
+            <button class="form-btn" type="submit">เข้าสู่ระบบ</button>
+        </form>
+    </div>
+
+    <script>
+        function loginAdmin(event){
+
+event.preventDefault();
+
+const user = document.getElementById("username").value;
+const pass = document.getElementById("password").value;
+
+if(user === "Admin" && pass === "123456"){
+
+localStorage.setItem("adminLogin",true);
+
+alert("เข้าสู่ระบบสำเร็จ");
+
+window.location.href="./admin.html";
+
+}else{
+
+document.getElementById("errorText").innerText = "Username หรือ Password ไม่ถูกต้อง";
+
+}
+
+}
+
+</script>
+<br><br><br>
+</body>
+</html>
