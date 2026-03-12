@@ -6,31 +6,68 @@
     <title>สำเร็จการชำระเงิน</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-10 rounded-lg shadow-lg text-center max-w-md">
+<body class="bg-gray-100 min-h-screen">
+    <nav class="h-14 bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center gap-6 font-bold">
+        <a href="../Home-page/Home-page.html" class="hover:underline">
+            <img src="https://e7.pngegg.com/pngimages/769/771/png-clipart-computer-icons-house-building-home-house-angle-building.png" alt="Company logo" title="Home" class="h-full w-12 rounded-xl">
+        </a>
 
-    <div class="text-green-500 text-6xl mb-4">
-        ✓
+        <select class="rounded-md col-start-1 row-start-1 appearance-none  text-center w-40" aria-label="หมวดหมู่สินค้า">
+                <option value="หมวดหมู่สินค้า" disabled selected class="hidden">หมวดหมู่สินค้า</option>
+                <option value="../category/category.html">สินค้าทั้งหมด</option>
+                <option value="../Pet food/Pet food.html">อาหารสัตว์เลี้ยง</option>
+                <option value="../Pet care products/Pet care products.html">ผลิตภัณฑ์สัตว์เลี้ยง</option>
+                <option value="../Pet toys/Pet toys.html">ของเล่นสัตว์เลี้ยง</option>
+                <option value="../Pet supplies/Pet supplies.html">กระเป๋า/รถเข็น</option>
+        </select>
+
+            <script>
+                const categorySelect = document.querySelector('select[aria-label="หมวดหมู่สินค้า"]');
+                categorySelect.addEventListener('change', function() {
+                    const selectedValue = this.value;
+                    if (selectedValue) {
+                        window.location.href = selectedValue;
+                    }
+                });
+            </script>
+
+        <a href="../Shopping cart/Shopping-cart.html" class="hover:underline">
+            <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="cart icon" class="w-6 inline-block ml-1">
+        </a>
+        <a href="../Profile/profile.html" class="hover:underline">
+            <img src="../Pictures/Gemini_Generated_Image_yb9wfdyb9wfdyb9w.png" alt="order-history" title="ประวัติการสั่งซื้อ" class="h-full w-12 rounded-xl">
+        </a>
+        <a href="../Profile/profile.html" class="hover:underline">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.2FAQg06FvvfETwJis8vFvwHaHa?cb=defcachec2&w=626&h=626&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Company logo" title="profile" class="h-full w-12 rounded-xl">
+        </a>
+    </nav>
+    <div class="bg-gray-100 flex items-center justify-center h-screen">
+        <div class="bg-white p-10 rounded-lg shadow-lg text-center max-w-md">
+
+        <div class="text-green-500 text-6xl mb-4">
+            ✓
+        </div>
+
+        <h1 class="text-2xl font-bold mb-2">
+            ชำระเงินสำเร็จ
+        </h1>
+
+        <p class="text-gray-600 mb-4">
+            ขอบคุณที่สั่งซื้อสินค้ากับ <br>
+            <span class="font-semibold">Hand In Paw Pethome</span>
+        </p>
+
+        <p class="text-gray-500 mb-6">
+            สินค้าของคุณจะถูกจัดส่งภายใน 3-5 วัน
+        </p>
+
+        <a href="../Home-page/Home-page.html"
+            class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
+            กลับไปหน้าแรก
+        </a>
+
+        </div>
     </div>
-
-    <h1 class="text-2xl font-bold mb-2">
-        ชำระเงินสำเร็จ
-    </h1>
-
-    <p class="text-gray-600 mb-4">
-        ขอบคุณที่สั่งซื้อสินค้ากับ <br>
-        <span class="font-semibold">Hand In Paw Pethome</span>
-    </p>
-
-    <p class="text-gray-500 mb-6">
-        สินค้าของคุณจะถูกจัดส่งภายใน 3-5 วัน
-    </p>
-
-    <a href="../Home-page/Home-page.html"
-       class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
-       กลับไปหน้าแรก
-    </a>
-
-</div>
+    
 </body>
 </html>
