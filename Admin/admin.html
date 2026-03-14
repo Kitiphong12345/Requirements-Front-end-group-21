@@ -9,6 +9,7 @@
 </head>
 
 <body class="bg-gray-100 font-sans">
+    
 
 <div class="max-w-5xl mx-auto p-6">
 
@@ -16,34 +17,18 @@
 Admin Dashboard
 </h1>
 
-<!-- สถิติ -->
-<div class="grid grid-cols-3 gap-4 mb-6">
-
-<div class="bg-white p-4 rounded shadow text-center">
-<p class="text-gray-500">จำนวนคำสั่งซื้อ</p>
-<p id="totalOrders" class="text-2xl font-bold">0</p>
-</div>
-
-<div class="bg-white p-4 rounded shadow text-center">
-<p class="text-gray-500">จำนวนสินค้า</p>
-<p id="totalItems" class="text-2xl font-bold">0</p>
-</div>
-
-<div class="bg-white p-4 rounded shadow text-center">
-<p class="text-gray-500">ยอดขายรวม</p>
-<p id="totalSales" class="text-2xl font-bold">0</p>
-</div>
+<button onclick="window.location.href='../Admin/edit-product.html'"
+class="bg-yellow-500 text-white px-3 py-1 rounded mt-2">
+แก้ไขสินค้า
+</button>
 
 </div>
-
-<!-- รายการคำสั่งซื้อ -->
-<h2 class="text-xl font-bold mb-3">
-รายการคำสั่งซื้อ
-</h2>
 
 <div id="orderList" class="space-y-4"></div>
 
 </div>
+
+
 
 <script>
 
@@ -55,6 +40,8 @@ const orderList = document.getElementById("orderList");
 const totalOrders = document.getElementById("totalOrders");
 const totalItems = document.getElementById("totalItems");
 const totalSales = document.getElementById("totalSales");
+
+orderList.innerHTML = "";
 
 let itemsCount = 0;
 let sales = 0;
@@ -107,8 +94,6 @@ totalItems.innerText = itemsCount;
 totalSales.innerText = "฿" + sales;
 
 }
-
-loadAdmin();
 
 </script>
 

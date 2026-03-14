@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+<link rel="shortcut icon" href="../Pictures/Gemini_Generated_Image_5ohi8r5ohi8r5ohi.png">
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen p-6">
+
+<h1 class="text-3xl font-bold mb-6 text-center">
+Admin Dashboard
+</h1>
+
+<!-- เพิ่มสินค้า -->
+<div class="bg-white p-4 rounded shadow mb-6">
+
+<h2 class="text-xl font-bold mb-2">เพิ่มสินค้า</h2>
+
+<input id="name" placeholder="ชื่อสินค้า" class="border p-2 mr-2">
+<input id="price" placeholder="ราคา" class="border p-2 mr-2">
+<input type="file" id="imageFile" class="border p-2 mr-2">
+
+<button onclick="addProduct()"
+class="bg-green-500 text-white px-4 py-2 rounded ml-2">
+เพิ่มสินค้า
+</button>
+
+</div>
+
+<!-- รายการสินค้า -->
+<h2 class="text-xl font-bold mb-3">รายการสินค้า</h2>
+
+<div id="productList" class="grid grid-cols-3 gap-4 mb-10"></div>
+
+<hr class="my-8">
+
+<!-- Orders -->
+<h2 class="text-xl font-bold mb-3">รายการคำสั่งซื้อ</h2>
+
+<div id="orderList"></div>
+
+<script>
+
+function loadProducts(){
+
+const products = JSON.parse(localStorage.getItem("products")) || [];
+const productList = document.getElementById("productList");
+
+productList.innerHTML = "";
+
+products.forEach(product=>{
+
+productList.innerHTML += `
+
+<div class="bg-white p-4 rounded shadow">
+
+<img src="${product.image}" class="w-full h-40 object-cover mb-2">
+
+<h3 class="font-bold">${product.name}</h3>
+
+<p>฿${product.price}</p>
+
+<button onclick="editProduct(${product.id})"
+class="bg-yellow-500 text-white px-3 py-1 rounded mt-2">
+แก้ไข
+</button>
+
+<button onclick="deleteProduct(${product.id})"
+class="bg-red-500 text-white px-3 py-1 rounded mt-2">
+ลบ
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+function addProduct(){
+
+const name = document.getElementById("name").value;
+const price = document.getElementById("price").value;
+const file = document.getElementById("imageFile").files[0];
+
+if(!name || !price){
+alert("กรุณากรอกชื่อสินค้าและราคา");
+return;
+}
+
+if(!file){
+alert("กรุณาเลือกรูปสินค้า");
+return;
+}
+
+let products = JSON.parse(localStorage.getItem("products")) || [];
+
+const reader = new FileReader();
+
+reader.onload = function(){
+
+const product = {
+
+id: Date.now(),
+name: name,
+price: Number(price),
+image: reader.result
+
+};
+
+products.push(product);
+
+localStorage.setItem("products", JSON.stringify(products));
+
+loadProducts();
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+function deleteProduct(id){
+
+let products = JSON.parse(localStorage.getItem("products")) || [];
+
+products = products.filter(p => p.id !== id);
+
+localStorage.setItem("products", JSON.stringify(products));
+
+loadProducts();
+
+}
+
+function editProduct(id){
+
+let products = JSON.parse(localStorage.getItem("products")) || [];
+
+let product = products.find(p => p.id === id);
+
+if(!product) return;
+
+let newName = prompt("ชื่อสินค้าใหม่", product.name);
+let newPrice = prompt("ราคาใหม่", product.price);
+
+if(newName){
+product.name = newName;
+}
+
+if(newPrice){
+product.price = Number(newPrice);
+}
+
+localStorage.setItem("products", JSON.stringify(products));
+
+loadProducts();
+
+}
+
+function loadOrders(){
+
+const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+const orderList = document.getElementById("orderList");
+
+orderList.innerHTML = "";
+
+orders.forEach(order=>{
+
+let itemsHTML = "";
+
+order.items.forEach(item=>{
+
+itemsHTML += `
+<p>${item.name} x ${item.quantity}</p>
+`;
+
+});
+
+orderList.innerHTML += `
+
+<div class="bg-white p-4 rounded shadow mb-4">
+
+<p><b>Order:</b> ${order.id}</p>
+<p>${order.date}</p>
+
+${itemsHTML}
+
+<p class="text-blue-600">${order.status}</p>
+
+<button onclick="changeStatus('${order.id}','กำลังจัดส่ง')"
+class="bg-blue-500 text-white px-3 py-1 rounded mt-2">
+กำลังจัดส่ง
+</button>
+
+<button onclick="changeStatus('${order.id}','จัดส่งแล้ว')"
+class="bg-green-500 text-white px-3 py-1 rounded mt-2">
+จัดส่งแล้ว
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+function changeStatus(orderId,status){
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+let order = orders.find(o => o.id === orderId);
+
+if(order){
+order.status = status;
+}
+
+localStorage.setItem("orders", JSON.stringify(orders));
+
+loadOrders();
+
+}
+
+loadProducts();
+loadOrders();
+
+</script>
+
+</body>
+</html>

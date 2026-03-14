@@ -114,7 +114,7 @@
             <!--ชำระผ่านธนาคาร-->
              
                 <label class="flex items-center gap-2 border p-4 rounded cursor-pointer">
-                    <input type="radio" name="payment" onclick="selectPayment('โอนผ่านธนาคาร')">
+                    <input type="radio" name="payment" onclick="selectPayment('ชำระผ่านธนาคาร')">
                     <span class="font-semibold">ชำระผ่านธนาคาร</span>
                 </label>
             
@@ -239,8 +239,46 @@ function confirmPayment(){
     }
 
     localStorage.removeItem("cart");
+}
+function confirmPayment(){
 
-    window.location.href = "./Payment_completed.html";
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+const address = JSON.parse(localStorage.getItem("address"));
+const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+if(cart.length === 0){
+alert("ไม่มีสินค้าในตะกร้า");
+return;
+}
+
+if(!address){
+alert("กรุณาเพิ่มที่อยู่ก่อน");
+return;
+}
+
+// สร้าง order
+const order = {
+
+id: "ORD" + Date.now(),
+date: new Date().toLocaleString(),
+items: cart,
+address: address,
+status: "กำลังจัดส่ง"
+
+};
+
+// เพิ่ม order ลง list
+orders.push(order);
+
+// บันทึก
+localStorage.setItem("orders", JSON.stringify(orders));
+
+// ล้างตะกร้า
+localStorage.removeItem("cart");
+
+alert("สั่งซื้อสำเร็จ");
+
+window.location.href = "./Payment_completed.html";
 }
 
 

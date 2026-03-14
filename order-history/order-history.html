@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ประวัติการสั่งซื้อ</title>
+<link rel="shortcut icon" href="../Pictures/Gemini_Generated_Image_5ohi8r5ohi8r5ohi.png" type="image/x-icon">
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -69,12 +70,14 @@ function loadOrders(){
 const orders = JSON.parse(localStorage.getItem("orders")) || [];
 const orderList = document.getElementById("orderList");
 
+orderList.innerHTML = "";
+
 if(orders.length === 0){
 orderList.innerHTML = "ยังไม่มีประวัติการสั่งซื้อ";
 return;
 }
 
-orders.reverse().forEach(order => {
+orders.slice().reverse().forEach(order => {
 
 let itemsHTML = "";
 
@@ -105,13 +108,34 @@ ${itemsHTML}
 
 <p class="mt-2 text-green-600 font-semibold">${order.status}</p>
 
+<button onclick="deleteOrder('${order.id}')"
+class="mt-3 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+ลบประวัติ
+</button>
+
 </div>
+
 `;
+
 });
 
 }
 
 loadOrders();
+function deleteOrder(orderId){
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+// กรอง order ที่ไม่ใช่ id นี้
+orders = orders.filter(order => order.id !== orderId);
+
+// บันทึกกลับ
+localStorage.setItem("orders", JSON.stringify(orders));
+
+// รีโหลดรายการใหม่
+loadOrders();
+
+}
 
 </script>
 

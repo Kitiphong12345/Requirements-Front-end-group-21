@@ -8,7 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="Home-page.css">
 </head>
-
 <body class="font-sans bg-gray-100">
 
     <!-- เมนู -->
@@ -56,7 +55,6 @@
     <!-- สินค้าแนะนำ -->
     <section class="mb-16">
         <h3 class="text-center font-bold text-xl mb-6">สินค้าแนะนำ</h3>
-
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 mx-auto w-3/4">
             
             <!-- สินค้า 1 -->
@@ -123,6 +121,7 @@
                 </a>
                 <p class="mt-2 font-bold">฿450.00</p>
             </div>
+            <div id="productContainer" class=" rounded-lg p-3 hover:shadow-xl transition"></div>
         </div>
     </section>
     <!-- สินค้าขายดี -->
@@ -199,5 +198,71 @@
 <footer class="text-center py-4 text-sm text-gray-500">
     © 2026 Hand In Paw Pethome
 </footer>
+<script>
+
+function loadProducts(){
+
+const products = JSON.parse(localStorage.getItem("products")) || [];
+
+const container = document.getElementById("productContainer");
+
+container.innerHTML = "";
+
+products.forEach(product=>{
+
+container.innerHTML += `
+
+<div class="bg-white p-4 rounded shadow">
+
+<img src="${product.image}"
+class="w-full h-40 object-cover mb-2">
+
+<h3 class="font-bold">${product.name}</h3>
+
+<p class="text-blue-600 font-bold">฿${product.price}</p>
+
+<button onclick="addToCart('${product.name}',${product.price},'${product.image}')"
+class="bg-green-100 text-white px-4 py-2 rounded mt-2">
+เพิ่มลงตะกร้า
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+function loadProducts(){
+
+const products = JSON.parse(localStorage.getItem("products")) || [];
+
+const container = document.getElementById("productContainer");
+
+container.innerHTML = "";
+
+products.forEach(product=>{
+
+container.innerHTML += `
+
+<div class="bg-white p-4 rounded shadow">
+
+<img src="${product.image}" class="w-full h-40 object-cover mb-2">
+
+<h3 class="font-bold">${product.name}</h3>
+
+<p class="text-blue-600 font-bold">฿${product.price}</p>
+
+</div>
+
+`;
+
+});
+
+}
+
+loadProducts();
+
+</script>
 </body>
 </html>
